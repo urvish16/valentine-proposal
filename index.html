@@ -59,13 +59,6 @@ color: #333;
 position: absolute;
 }
 
-.message {
-display: none;
-font-size: 26px;
-color: #e6005c;
-margin-top: 20px;
-}
-
 /* Floating hearts */
 .floating-heart {
 position: absolute;
@@ -129,10 +122,6 @@ top: 0;
 </head>
 <body>
 
-<audio id="music" loop>
-<source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
-</audio>
-
 <div class="heart"></div>
 
 <div class="container">
@@ -141,18 +130,12 @@ top: 0;
 ```
 <button id="yesBtn" onclick="sayYes()">Yes</button>
 <button id="noBtn">No</button>
-
-<div class="message" id="loveMessage">
-Best decision ever! ❤️<br>
-I Love You 💖💖
-</div>
 ```
 
 </div>
 
 <script>
 const noBtn = document.getElementById("noBtn");
-const music = document.getElementById("music");
 
 function moveButton() {
 const x = Math.random() * (window.innerWidth - 100);
@@ -165,9 +148,8 @@ noBtn.addEventListener("mouseover", moveButton);
 noBtn.addEventListener("click", moveButton);
 
 function sayYes() {
-document.getElementById("loveMessage").style.display = "block";
-music.play();
-confettiEffect();
+// Redirect to the yes page
+window.location.href = "yes.html";
 }
 
 // Floating hearts generator
@@ -181,34 +163,6 @@ document.body.appendChild(heart);
 
 setTimeout(() => heart.remove(), 6000);
 }, 400);
-
-// Simple confetti
-function confettiEffect() {
-for (let i = 0; i < 100; i++) {
-const confetti = document.createElement("div");
-confetti.style.position = "absolute";
-confetti.style.width = "8px";
-confetti.style.height = "8px";
-confetti.style.background = ["#ff3366", "#ffcc00", "#ffffff"][Math.floor(Math.random() * 3)];
-confetti.style.left = Math.random() * 100 + "vw";
-confetti.style.top = "-10px";
-confetti.style.opacity = 0.8;
-confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear`;
-document.body.appendChild(confetti);
-
-confetti.addEventListener("animationend", () => confetti.remove());
-}
-}
-
-const style = document.createElement("style");
-style.innerHTML = `
-@keyframes fall {
-to {
-transform: translateY(100vh) rotate(360deg);
-}
-}
-`;
-document.head.appendChild(style);
 </script>
 
 </body>
